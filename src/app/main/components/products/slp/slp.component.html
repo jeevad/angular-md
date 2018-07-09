@@ -1,0 +1,323 @@
+<div id="slp" class="page-layout carded fullwidth" fusePerfectScrollbar>
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg mat-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- HEADER -->
+    <div class="header white-fg" fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- APP TITLE -->
+      <div fxLayout="row" fxLayoutAlign="start center">
+
+        <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/slp'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <div class="slp-image mr-8 mr-sm-16" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+          <img *ngIf="slp.images[0]" [src]="slp.images[0].url">
+          <img *ngIf="!slp.images[0]" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+          <div class="h2" *ngIf="pageType ==='edit'">
+            {{slp.name}}
+          </div>
+          <div class="h2" *ngIf="pageType ==='new'">
+            New Slp
+          </div>
+          <div class="subtitle secondary-text">
+            <span>Slp Detail</span>
+          </div>
+        </div>
+      </div>
+      <!-- / APP TITLE -->
+
+      <button mat-raised-button class="save-slp-button mat-white-bg" [disabled]="slpForm.invalid" *ngIf="pageType ==='new'" (click)="addSlp()">
+        <span>ADD</span>
+      </button>
+
+      <button mat-raised-button class="save-slp-button mat-white-bg" [disabled]="slpForm.invalid || slpForm.pristine" *ngIf="pageType ==='edit'"
+        (click)="saveSlp()">
+        <span>SAVE</span>
+      </button>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card mat-white-bg">
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <form name="slpForm" [formGroup]="slpForm" class="slp w-100-p" fxLayout="column" fxFlex>
+
+          <mat-tab-group>
+
+            <mat-tab label="Qoute">
+
+              <div class="tab-content p-24" fusePerfectScrollbar>
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Purpose of loan" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Property Type" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Borrower Entity Type" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                      <mat-option [value]="'Russia'">
+                        Russia
+                      </mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <textarea matInput name="description" formControlName="description" placeholder="Address1" rows="5">
+                                </textarea>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <textarea matInput name="description" formControlName="description" placeholder="Address2" rows="5">
+                                  </textarea>
+                  </mat-form-field>
+                </div>
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="City" required>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="State" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Zip code" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Borrower Est Credit Score" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Gross Monthly Rent">
+                  </mat-form-field>
+                </div>
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Square Footage">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Estimated Closing Date">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Purchase Price">
+                  </mat-form-field>
+                </div>
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Annual Taxes">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Annual Inssurance">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Annual HOA Fees">
+                  </mat-form-field>
+                </div>
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="First Name">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Last Name">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Email Address">
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <input matInput name="name" formControlName="name" placeholder="Phone">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+            </mat-tab>
+
+
+
+            <mat-tab label="Economics">
+              <div class="tab-content p-24" fusePerfectScrollbar>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="priceTaxExcl" formControlName="priceTaxExcl" placeholder="Tax Excluded Price" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="priceTaxIncl" formControlName="priceTaxIncl" placeholder="Tax Included Price" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="taxRate" formControlName="taxRate" placeholder="Tax Rate" type="number">
+                  <span matPrefix>&#37;</span>
+                </mat-form-field>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="comparedPrice" formControlName="comparedPrice" placeholder="Compared Price" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                  <mat-hint align="start">Add a compare price to show next to the real price
+                  </mat-hint>
+                </mat-form-field>
+
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Declarations">
+              <div class="tab-content p-24" fusePerfectScrollbar>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="sku" formControlName="sku" placeholder="SKU">
+                </mat-form-field>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="quantity" formControlName="quantity" placeholder="Quantity" type="number">
+                </mat-form-field>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Borrower">
+              <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
+
+                <div class="py-16" fxLayout="row">
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Purpose of loan" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                      <mat-option [value]="'Russia'">
+                        Russia
+                      </mat-option>
+                      <mat-option [value]="'China'">
+                        China
+                      </mat-option>
+                      <mat-option [value]="'Japan'">
+                        Japan
+                      </mat-option>
+                      <mat-option [value]="'Turkey'">
+                        Turkey
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Property Type" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                      <mat-option [value]="'Russia'">
+                        Russia
+                      </mat-option>
+                      <mat-option [value]="'China'">
+                        China
+                      </mat-option>
+                      <mat-option [value]="'Japan'">
+                        Japan
+                      </mat-option>
+                      <mat-option [value]="'Turkey'">
+                        Turkey
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-select placeholder="Borrower Entity Type" formControlName="width" required>
+                      <mat-option [value]="'United States of America'">
+                        United States of America
+                      </mat-option>
+                      <mat-option [value]="'United Kingdom'">
+                        United Kingdom
+                      </mat-option>
+                      <mat-option [value]="'Russia'">
+                        Russia
+                      </mat-option>
+                      <mat-option [value]="'China'">
+                        China
+                      </mat-option>
+                      <mat-option [value]="'Japan'">
+                        Japan
+                      </mat-option>
+                      <mat-option [value]="'Turkey'">
+                        Turkey
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="Weight" formControlName="weight" placeholder="Weight">
+                </mat-form-field>
+
+                <mat-form-field class="w-100-p">
+                  <input matInput name="extraShippingFee" formControlName="extraShippingFee" placeholder="Extra Shipping Fee" type="number">
+                  <span matPrefix>$&nbsp;</span>
+                </mat-form-field>
+              </div>
+            </mat-tab>
+
+          </mat-tab-group>
+        </form>
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+</div>
